@@ -38,7 +38,7 @@
 - 此插件没有匹配指令模式，若需要快捷处理序列，请加入 *鹿芗泽* 团队，获取序列处理的快捷指令。
 - 请关注公众号：鹿芗泽，回复 “biotools” 获取邀请链接，以加入 utools 团队。
 
-![鹿芗泽公众号](https://tuchuang-1300837013.cos.ap-nanjing.myqcloud.com/picgo/20250727143449062.png?imageSlim)
+![鹿芗泽公众号](https://github.com/luxiangze/utools-biotools/blob/35a2b2c4986e2dc8bf4ff9d76ad9c896d17cbec4/luxiangze.png)
 
 ## 版本信息
 
