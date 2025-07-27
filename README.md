@@ -14,12 +14,6 @@
 
 ### 快速启动
 - 在 uTools 中输入 `biotools` 或 `生物工具`
-- 或者使用特定命令直接处理序列：
-  - `reverse-complement` / `反向互补` / `rc`
-  - `transcribe` / `转录` / `dna2rna`
-  - `reverse-transcribe` / `反转录` / `rna2dna`
-  - `translate` / `翻译` / `protein`
-  - `stats` / `统计` / `分析`
 
 ### 操作流程
 1. 输入或粘贴生物序列
@@ -41,6 +35,10 @@
 ## 注意事项
 
 - 支持批量处理和单个序列处理
+- 此插件没有匹配指令模式，若需要快捷处理序列，请加入 *鹿芗泽* 团队，获取序列处理的快捷指令。
+- 请关注公众号：鹿芗泽，回复 “biotools” 获取邀请链接，以加入 utools 团队。
+
+![鹿芗泽公众号](https://tuchuang-1300837013.cos.ap-nanjing.myqcloud.com/picgo/20250727143449062.png?imageSlim)
 
 ## 版本信息
 
