@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biotools - 生物序列处理工具</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="sequence-utils.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">🧬</div>
+                    <h1>Biotools</h1>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot" id="statusDot"></div>
+                    <span id="statusText">检查中...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+            <!-- 序列输入区域 -->
+            <section class="input-section">
+                <div class="section-header">
+                    <h2>序列输入</h2>
+                    <div class="input-actions">
+                        <button id="pasteBtn" class="btn btn-secondary">粘贴</button>
+                        <button id="clearBtn" class="btn btn-secondary">清空</button>
+                    </div>
+                </div>
+                <textarea 
+                    id="sequenceInput" 
+                    placeholder="请输入生物序列（DNA/RNA/蛋白质）或 FASTA 格式内容..."
+                    rows="4"
+                ></textarea>
+                <div class="input-info">
+                    <span id="sequenceInfo">支持自动检测序列类型</span>
+                </div>
+            </section>
+
+            <!-- 工具按钮区域 -->
+            <section class="tools-section">
+                <h2>处理工具</h2>
+                <div class="tools-grid">
+                    <div class="tool-category">
+                        <h3>基础操作</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="uppercase">
+                                <div class="tool-icon">🔤</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">转大写</div>
+                                    <div class="tool-desc">转换为大写字母</div>
+                                </div>
+                            </button>
+                            <button class="tool-btn" data-action="lowercase">
+                                <div class="tool-icon">🔡</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">转小写</div>
+                                    <div class="tool-desc">转换为小写字母</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-category">
+                        <h3>序列转换</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="reverse-complement">
+                                <div class="tool-icon">🔄</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">反向互补</div>
+                                    <div class="tool-desc">DNA 反向互补序列</div>
+                                </div>
+                            </button>
+                            <button class="tool-btn" data-action="transcribe">
+                                <div class="tool-icon">➡️</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">转录</div>
+                                    <div class="tool-desc">DNA → RNA (T→U)</div>
+                                </div>
+                            </button>
+                            <button class="tool-btn" data-action="reverse-transcribe">
+                                <div class="tool-icon">⬅️</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">反转录</div>
+                                    <div class="tool-desc">RNA → DNA (U→T)</div>
+                                </div>
+                            </button>
+                            <button class="tool-btn" data-action="translate">
+                                <div class="tool-icon">🧪</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">翻译</div>
+                                    <div class="tool-desc">DNA/RNA → 蛋白质</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-category">
+                        <h3>序列分析</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="stats">
+                                <div class="tool-icon">📊</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">统计分析</div>
+                                    <div class="tool-desc">长度、组成、GC含量</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="tool-category">
+                        <h3>文本处理</h3>
+                        <div class="tool-buttons">
+                            <button class="tool-btn" data-action="remove-newlines">
+                                <div class="tool-icon">📝</div>
+                                <div class="tool-info">
+                                    <div class="tool-name">移除换行符</div>
+                                    <div class="tool-desc">删除所有换行符</div>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 结果显示区域 -->
+            <section class="result-section" id="resultSection" style="display: none;">
+                <div class="section-header">
+                    <h2>处理结果</h2>
+                    <div class="result-actions">
+                        <button id="copyResultBtn" class="btn btn-primary">复制结果</button>
+                        <button id="closeResultBtn" class="btn btn-secondary">关闭</button>
+                    </div>
+                </div>
+                <div id="resultContent" class="result-content"></div>
+            </section>
+
+            <!-- 统计显示区域 -->
+            <section class="stats-section" id="statsSection" style="display: none;">
+                <h2>序列统计</h2>
+                <div id="statsContent" class="stats-content"></div>
+            </section>
+        </main>
+
+        <!-- 加载指示器 -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-spinner"></div>
+            <div class="loading-text">处理中...</div>
+        </div>
+
+        <!-- 错误提示 -->
+        <div class="error-toast" id="errorToast" style="display: none;">
+            <div class="error-content">
+                <div class="error-icon">⚠️</div>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

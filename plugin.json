@@ -1,0 +1,24 @@
+{
+  "name": "biotools",
+  "pluginName": "Biotools - 生物序列处理工具",
+  "description": "专业的生物序列处理工具套件，支持 DNA、RNA 和蛋白质序列的反向互补、转录、翻译、统计分析等功能。本地化处理，无需网络连接，高效便捷。",
+  "author": "gyongkang666",
+  "homepage": "https://github.com/gyongkang666/biotools",
+  "version": "1.0.0",
+  "logo": "logo.png",
+  "main": "index.html",
+  "preload": "preload.js",
+  "pluginSetting": {
+    "single": false,
+    "height": 600
+  },
+  "features": [
+    {
+      "code": "biotools",
+      "explain": "生物序列处理工具 - 专业的生物序列处理工具套件",
+      "icon": "logo.png",
+      "platform": ["win32", "darwin", "linux"],
+      "cmds": ["biotools", "生物工具", "序列处理", "dna", "rna", "protein"]
+    }
+  ]
+}
